@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Interés Compuesto</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f0f4f8;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.calculadora{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 0 15px rgba(0,0,0,.2);
+    width:350px;
+}
+
+h2{
+    text-align:center;
+    color:#1f4e79;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border-radius:8px;
+    border:1px solid #ccc;
+    box-sizing:border-box;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#1f4e79;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#163a5b;
+}
+
+.resultado{
+    margin-top:20px;
+    background:#eef6ff;
+    padding:15px;
+    border-radius:10px;
+}
+</style>
+</head>
+<body>
+
+<div class="calculadora">
+
+<h2>Interés Compuesto</h2>
+
+<input type="number" id="capital" placeholder="Capital inicial">
+
+<input type="number" id="tasa" placeholder="Interés anual (%)">
+
+<input type="number" id="años" placeholder="Años">
+
+<input type="number" id="frecuencia" placeholder="Capitalizaciones por año (12 = mensual)">
+
+<button onclick="calcular()">Calcular</button>
+
+<div class="resultado">
+<p><strong>Monto final:</strong> <span id="monto">0.00</span></p>
+<p><strong>Intereses generados:</strong> <span id="interes">0.00</span></p>
+</div>
+
+definitivo</div>
+
+<script>
+
+function calcular(){
+
+let P = parseFloat(document.getElementById("capital").value);
+let r = parseFloat(document.getElementById("tasa").value)/100;
+let t = parseFloat(document.getElementById("años").value);
+let n = parseFloat(document.getElementById("frecuencia").value);
+
+if(isNaN(P)||isNaN(r)||isNaN(t)||isNaN(n)||n<=0){
+    alert("Introduce valores válidos.");
+    return;
+}
+
+let monto = P * Math.pow((1 + r/n), n*t);
+let interes = monto - P;
+
+document.getElementById("monto").innerHTML =
+monto.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2});
+
+document.getElementById("interes").innerHTML =
+interes.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2});
+
+}
+
+</script>
+
+</body>
+</html>
