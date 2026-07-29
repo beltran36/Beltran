@@ -7,34 +7,49 @@
 body{
     background:#d9d9d9;
     font-family:"Times New Roman", serif;
-    overflow:hidden;
+    overflow:auto;
+    min-height:100vh;
+    padding:0 20px 40px;
+}
+
+main{
+    max-width:900px;
+    margin:0 auto;
+    padding:20px 0 60px;
 }
 
 /* Barra superior */
 
-.barra{
+.barra-superior{
     width:100%;
     height:48px;
     background:#111116;
+    margin-bottom:20px;
 }
 
 /* Título */
 
 h1{
     text-align:center;
-    font-size:96px;
+    font-size:clamp(2rem, 4vw, 4rem);
     font-weight:bold;
-    margin-top:10px;
+    margin:10px 0 20px;
+}
+
+section{
+    margin-bottom:24px;
 }
 
 /* Botón */
 
 .boton{
-    position:absolute;
-    left:130px;
-    top:290px;
+    position:relative;
+    left:auto;
+    top:auto;
+    display:flex;
+    margin:70px auto 80px;
 
-    width:380px;
+    width:min(380px, 90vw);
     height:132px;
 
     background:white;
