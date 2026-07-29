@@ -3,118 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculadora de Interés Compuesto</title>
+<title>Calculadora de interés compuesto</title>
 <meta name="description" content="Calcula el interés compuesto con capital, tasa y años para ver el monto final de tu inversión.">
 <meta name="google-adsense-account" content="ca-pub-9041580058203929">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9041580058203929"
     crossorigin="anonymous"></script>
 <link rel="stylesheet" href="style.css">
-
-<style>
-body{
-    font-family: Arial, sans-serif;
-    background:#f0f4f8;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-}
-
-.calculadora{
-    background:white;
-    padding:25px;
-    border-radius:15px;
-    box-shadow:0 0 15px rgba(0,0,0,.2);
-    width:350px;
-}
-
-h2{
-    text-align:center;
-    color:#1f4e79;
-}
-
-input{
-    width:100%;
-    padding:10px;
-    margin:8px 0;
-    border-radius:8px;
-    border:1px solid #ccc;
-    box-sizing:border-box;
-}
-
-button{
-    width:100%;
-    padding:12px;
-    background:#1f4e79;
-    color:white;
-    border:none;
-    border-radius:8px;
-    font-size:16px;
-    cursor:pointer;
-}
-
-button:hover{
-    background:#163a5b;
-}
-
-.resultado{
-    margin-top:20px;
-    background:#eef6ff;
-    padding:15px;
-    border-radius:10px;
-}
-</style>
 </head>
 <body>
+    <div class="barra-superior"></div>
 
-<div class="calculadora">
+    <nav class="nav">
+        <a href="index.html" class="nav-link">Inicio</a>
+        <a href="calculadora.html" class="nav-link activo">Calculadora</a>
+        <a href="guia-interes-compuesto.html" class="nav-link">Guía</a>
+        <a href="ejemplos-interes-compuesto.html" class="nav-link">Ejemplos</a>
+        <a href="faq.html" class="nav-link">FAQ</a>
+        <a href="politica-privacidad.html" class="nav-link">Privacidad</a>
+    </nav>
 
-<h2>Interés Compuesto</h2>
-<p>Introduce los datos de tu inversión para ver cómo crece con el tiempo.</p>
-<p><a href="index.html">Volver al inicio</a> | <a href="politica-privacidad.html">Política de privacidad</a> | <a href="contacto.html">Contacto</a></p>
+    <main>
+        <section class="hero">
+            <h1>Calculadora de interés compuesto</h1>
+            <p>Introduce los datos de tu inversión para ver cómo crece con el tiempo y qué resultado obtendrías al final del periodo.</p>
+        </section>
 
-<input type="number" id="capital" placeholder="Capital inicial">
+        <section class="card calculadora-card">
+            <h2>Completa los datos</h2>
+            <input type="number" id="capital" placeholder="Capital inicial">
+            <input type="number" id="tasa" placeholder="Interés anual (%)">
+            <input type="number" id="años" placeholder="Años">
+            <input type="number" id="frecuencia" placeholder="Capitalizaciones por año (12 = mensual)">
+            <button onclick="calcular()">Calcular</button>
 
-<input type="number" id="tasa" placeholder="Interés anual (%)">
+            <div class="resultado">
+                <p><strong>Monto final:</strong> <span id="monto">0.00</span></p>
+                <p><strong>Intereses generados:</strong> <span id="interes">0.00</span></p>
+            </div>
+        </section>
 
-<input type="number" id="años" placeholder="Años">
-
-<input type="number" id="frecuencia" placeholder="Capitalizaciones por año (12 = mensual)">
-
-<button onclick="calcular()">Calcular</button>
-
-<div class="resultado">
-<p><strong>Monto final:</strong> <span id="monto">0.00</span></p>
-<p><strong>Intereses generados:</strong> <span id="interes">0.00</span></p>
-</div>
-
-definitivo</div>
+        <section class="card">
+            <h2>Consejos para interpretar el resultado</h2>
+            <p>Cuanto mayor sea el tiempo y la frecuencia de capitalización, más notable será el crecimiento. Esto es lo que hace tan potente al interés compuesto.</p>
+        </section>
+    </main>
 
 <script>
-
 function calcular(){
+    let P = parseFloat(document.getElementById("capital").value);
+    let r = parseFloat(document.getElementById("tasa").value)/100;
+    let t = parseFloat(document.getElementById("años").value);
+    let n = parseFloat(document.getElementById("frecuencia").value);
 
-let P = parseFloat(document.getElementById("capital").value);
-let r = parseFloat(document.getElementById("tasa").value)/100;
-let t = parseFloat(document.getElementById("años").value);
-let n = parseFloat(document.getElementById("frecuencia").value);
+    if(isNaN(P)||isNaN(r)||isNaN(t)||isNaN(n)||n<=0){
+        alert("Introduce valores válidos.");
+        return;
+    }
 
-if(isNaN(P)||isNaN(r)||isNaN(t)||isNaN(n)||n<=0){
-    alert("Introduce valores válidos.");
-    return;
+    let monto = P * Math.pow((1 + r/n), n*t);
+    let interes = monto - P;
+
+    document.getElementById("monto").innerHTML =
+    monto.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2});
+
+    document.getElementById("interes").innerHTML =
+    interes.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2});
 }
-
-let monto = P * Math.pow((1 + r/n), n*t);
-let interes = monto - P;
-
-document.getElementById("monto").innerHTML =
-monto.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2});
-
-document.getElementById("interes").innerHTML =
-interes.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2});
-
-}
-
 </script>
 
 </body>
