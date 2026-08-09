@@ -9,6 +9,7 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: github-pages  # ← Add this line
     steps:
       - uses: actions/checkout@v4
       - name: Setup Pages
